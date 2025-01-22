@@ -1,0 +1,57 @@
+# my global config
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    server_name: Prometheus
+
+remote_write:
+  - url: "http://victoriam:8428/api/v1/write"
+    queue_config:
+      max_samples_per_send: 10000
+      capacity: 20000
+      max_shards: 30
+
+# Alertmanager configuration
+#alerting:
+#  alertmanagers:
+#    - static_configs:
+#        - targets:
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+#rule_files:
+#   - "./alert/livehosts.yaml"
+#   - "./alert/rootfs.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'Prometheus'
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/targets/localhost.yml
+        refresh_interval: 30s
+
+# Для генерации токена используйте 
+# mc alias set myminio http://<your-minio-url>:<port> <access-key> <secret-key>
+# mc admin prometheus generate myminio --api-version v2
+  - job_name: minio-job
+    bearer_token: "<token>"
+    metrics_path: /minio/v2/metrics/cluster
+    scheme: http
+    static_configs:
+      - targets:
+        - "minio:9000"
+
+  - job_name: uploader
+    scheme: http
+    static_configs:
+      - targets:
+        - "uploader:8081"
+
+  - job_name: security
+    scheme: http
+    static_configs:
+      - targets:
+        - "security:8082"

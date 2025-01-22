@@ -1,0 +1,4 @@
+flask
+pyjwt
+werkzeug
+prometheus_flask_exporter

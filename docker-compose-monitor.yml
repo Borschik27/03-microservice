@@ -1,0 +1,47 @@
+services:
+  grafana:
+    image: grafana/grafana:main-ubuntu # Origin hub images
+    container_name: grafana
+    user: root
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - /opt/monitor/var/lib/grafana/data:/var/lib/grafana
+      - /etc/grafana:/etc/grafana
+      - /opt/monitor/var/log:/var/log/grafana
+
+  prometheus:
+    image: prom/prometheus:main # Origin hub image
+    container_name: prometheus
+    user: root
+    restart: always
+    ports:
+      - '9090:9090'
+    volumes:
+      - /opt/monitor/etc/prometheus:/etc/prometheus
+      - /opt/monitor/var/lib/prometheus/data:/prometheus
+    # networks:
+    #   - monitor
+
+  victoriametrics-single:
+    image: victoriametrics/victoria-metrics:stable
+    container_name: victoriam
+    user: root
+    restart: always
+    ports:
+      - '8428:8428'
+    volumes:
+      - /opt/monitor/etc/victoria-metrics/data:/victoria-metrics-data
+
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    pid: host
+    restart: always
+    ports:
+      - '9100:9100'
+    volumes:
+      - '/:/host:ro'
