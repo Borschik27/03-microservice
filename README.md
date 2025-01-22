@@ -300,3 +300,31 @@ GitLab CI поддерживает **parallel jobs**, которые позво�
 ---
 
 Данное решение обеспечивает полный мониторинг состояния хостов и сервисов, соответствуя всем предъявленным требованиям.
+
+# Задача 4
+Изменен конфиг приложений python добавлен модуль экспортера:
+from prometheus_flask_exporter import PrometheusMetrics
+
+Настроен мониторинг серфисов с помощью Prometheus/Grafana
+
+Вывод рабочих контейнеров:
+![image](https://github.com/user-attachments/assets/b5d6bfc5-f411-4a8c-97de-b462eeaea02e)
+
+Вывод подключенных к prometheus endoint's:
+![image](https://github.com/user-attachments/assets/e7568767-09ad-4d41-87a4-57e579a5a107)
+
+Привер дашбордов для endpoint's:
+
+Для всего кластера node-exporter:
+![image](https://github.com/user-attachments/assets/57b353b2-e836-4e66-b86d-cde5e67d3e3d)
+
+Для узлов uploader/secyrity:
+![image](https://github.com/user-attachments/assets/8e1d046d-f69a-4452-bd3c-922d33459485)
+
+
+
+
+
+![image](https://github.com/user-attachments/assets/dafff651-4f7d-47cd-a8a9-ee795e1e4587)
+
+
