@@ -323,8 +323,3 @@ from prometheus_flask_exporter import PrometheusMetrics
 
 
 
-
-
-![image](https://github.com/user-attachments/assets/dafff651-4f7d-47cd-a8a9-ee795e1e4587)
-
-
