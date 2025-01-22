@@ -8,7 +8,7 @@ from prometheus_flask_exporter import PrometheusMetrics
 app = Flask(__name__)
 
 # Секретный ключ для JWT
-JWT_SECRET = os.getenv('JWT_SECRET', 'edb20f74ef10a2e010ae7f73fb18a6f7b5f2988c9cf2e14e06ec95ea8a7afedb')
+JWT_SECRET = os.getenv('JWT_SECRET', '')
 JWT_ALGORITHM = os.getenv('JWT_ALGORITHM', 'HS256')
 
 # Настроим Prometheus метрики
