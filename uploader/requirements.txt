@@ -1,0 +1,6 @@
+flask
+minio
+requests
+Pillow
+pyjwt
+prometheus_flask_exporter
